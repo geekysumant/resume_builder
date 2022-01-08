@@ -10,4 +10,10 @@ module ApplicationHelper
         image_path("default_user.png")
     end
 
+    def user_profile_avatar(profile)
+        if profile.avatar
+            return profile.avatar.url
+        end
+    end
+
 end

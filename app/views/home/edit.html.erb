@@ -10,10 +10,15 @@
 
         <%= render 'shared/edit_section', title: "Profile details" do %>
             <%= f.text_field :name, value: @profile.name || current_user.name, placeholder: "Name" %><br/>
+            <%= f.file_field :avatar , label: "Upload Image" %>
             <div class="flex items-center my-4">
-                <%= image_tag gravatar_url_for(current_user), 
+            <% if @profile.avatar.url %>
+                <%= image_tag user_profile_avatar(@profile), 
                     id: "image-preview", style:"max-width:200px"
                 %>
+            <% else %>
+                <img id="image-preview" style={max-width:200px} src="https://secure.gravatar.com/avatar/1234" />
+            <% end %>
             </div>
             <%= f.text_field :job_title, value: @profile.job_title, placeholder: "Job title" %><br/>
             <%= f.text_field :total_experience, value: @profile.total_experience, placeholder: "Total experience" %><br/>
