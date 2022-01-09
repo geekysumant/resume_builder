@@ -10,7 +10,15 @@
 
         <%= render 'shared/edit_section', title: "Profile details" do %>
             <%= f.text_field :name, value: @profile.name || current_user.name, placeholder: "Name" %><br/>
-            <%= f.file_field :avatar , label: "Upload Image" %>
+            
+            <div class="flex  flex-row items-center">
+            <%= f.file_field :avatar , id:"avatar", style:"display: none" , class:"m-6" ,onchange:"loadFile(event)" %>
+            <label for="avatar" style="cursor: pointer;" class=" py-2 px-4 flex justify-start items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mr-4">
+            <img class="mr-2" src="/assets/upload.svg">
+                Upload Image
+            </label>
+
+
             <div class="flex items-center my-4">
             <% if @profile.avatar.url %>
                 <%= image_tag user_profile_avatar(@profile), 
@@ -20,6 +28,9 @@
                 <img id="image-preview" style={max-width:200px} src="https://secure.gravatar.com/avatar/1234" />
             <% end %>
             </div>
+            </div>
+
+           
             <%= f.text_field :job_title, value: @profile.job_title, placeholder: "Job title" %><br/>
             <%= f.text_field :total_experience, value: @profile.total_experience, placeholder: "Total experience" %><br/>
             <%= f.text_area :overview, value: @profile.overview, placeholder: "Profile overview", required: true %><br/>
@@ -70,3 +81,10 @@
     <% end %>
 
 </main>
+
+<script>
+var loadFile = function(event) {
+    var image = document.getElementById('image-preview');
+    image.src = URL.createObjectURL(event.target.files[0]);
+};
+</script>
