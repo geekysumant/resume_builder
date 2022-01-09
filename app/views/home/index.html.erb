@@ -5,7 +5,16 @@
         <h1 class="text-3xl"> 
             Welcome, <span class="text-purple-600 font-semibold"><%= @user.name %><span>
         </h1>
-        <%= render 'shared/input/buttons/secondary', color: "purple", label: "Edit", href: edit_url %>
+        
+        <div class="flex justify-around align-center">
+            <%= render 'shared/input/buttons/secondary', color: "purple", label: "Edit", href: edit_url %>
+
+            <button class="text-purple-600  border-purple-600 border-2  text-white font-bold py-2 px-4  rounded-lg mx-4"
+            onclick="navigator.clipboard.writeText(`http://localhost:3000/resume/${<%= @user.profile.id %>}`); this.innerHTML='Link copied!'; "
+            >
+                Copy Resume Link
+            </button>
+        </div>
     </div>
     
     <%= render 'shared/profile/preview', profile: @user.profile %>

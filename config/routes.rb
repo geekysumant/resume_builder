@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'resumes/show'
   root   'home#index'
   get    'edit'    => 'home#edit'
   get    'login'   => 'sessions#new'
@@ -7,6 +8,8 @@ Rails.application.routes.draw do
 
   get    'signup'  => 'users#new'
   post   'signup'  => 'users#create'
+
+  get   'resume/:id'=> 'resumes#show'
 
   resources :profiles , only: [:update]
   resources :educations , only: [:new]
